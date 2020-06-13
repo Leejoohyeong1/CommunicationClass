@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CommunicationDetailActivity">
+
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="0dp"
+        android:layout_height="450dp"
+        android:background="#000000"
+        app:pager_animation="Accordion"
+        app:auto_cycle="true"
+        app:indicator_visibility="visible"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:selected_color="#0095BF"
+        app:unselected_color="#55333333"
+        app:shape="oval"
+        app:selected_padding_left="5dp"
+        app:selected_padding_right="5dp"
+        app:unselected_padding_left="5dp"
+        app:unselected_padding_right="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        app:selected_width="6dp"
+        app:selected_height="6dp"
+        app:unselected_width="6dp"
+        app:unselected_height="6dp"
+        android:layout_marginBottom="20dp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/custom_indicator"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
