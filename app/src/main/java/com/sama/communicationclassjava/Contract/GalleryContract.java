@@ -7,6 +7,8 @@ public interface GalleryContract {
         void TestView();
         void Histortview();
         void DetailActivity(CommunicationItem item);
+        void ItemloadingAlertShow();
+        void ItemloadingAlertDisabled();
 
     }
 

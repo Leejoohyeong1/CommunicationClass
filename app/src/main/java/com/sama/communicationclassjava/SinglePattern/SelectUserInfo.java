@@ -9,7 +9,7 @@ public class SelectUserInfo {
     String ClassName = "temp_ClassName";
     String Parents = "temp_Parents";
     String Group = "temp_Group";
-    String Area = "temp_Area";
+    int Area = 1;
     //  작성날짜
     String ProfileImage = "temp_ProfileImage";
     //  프로필이미지
@@ -81,11 +81,11 @@ public class SelectUserInfo {
         Group = group;
     }
 
-    public String getArea() {
+    public int getArea() {
         return Area;
     }
 
-    public void setArea(String area) {
+    public void setArea(int area) {
         Area = area;
     }
 }

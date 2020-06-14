@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sama.communicationclassjava.Adapter.Holder.GalleryHolder;
 import com.sama.communicationclassjava.Contract.GalleryAdapterContract;
 import com.sama.communicationclassjava.Data.CommunicationItem;
+import com.sama.communicationclassjava.Data.GalleryDatilData;
 import com.sama.communicationclassjava.Lisetner.OnItemClickListener;
 import com.sama.communicationclassjava.R;
 
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> implements GalleryAdapterContract.Model, GalleryAdapterContract.View{
 
-    ArrayList<CommunicationItem> ListItem;
+    ArrayList<GalleryDatilData> ListItem;
 
 
     OnItemClickListener onItemClickListener = null;
@@ -68,18 +69,32 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> implemen
         onItemClickListener = clickLisetner;
     }
 
+
     @Override
-    public void addItems(ArrayList<CommunicationItem> CommunicationItemList) {
-        this.ListItem.addAll(CommunicationItemList);
+    public GalleryDatilData LastItem() {
+        if(this.ListItem.size() - 1 < 0){
+            return null;
+        }
+        return this.ListItem.get(this.ListItem.size() - 1);
     }
 
     @Override
-    public void addItem(CommunicationItem item) {
+    public void addItems(ArrayList<GalleryDatilData> galleryDatilData) {
+        this.ListItem.addAll(galleryDatilData);
+    }
+
+    @Override
+    public int getSize() {
+        return this.ListItem.size();
+    }
+
+    @Override
+    public void addItem(GalleryDatilData item) {
         this.ListItem.add(item);
     }
 
     @Override
-    public CommunicationItem getItem(int position) {
+    public GalleryDatilData getItem(int position) {
         return this.ListItem.get(position);
     }
 

@@ -1,7 +1,8 @@
 package com.sama.communicationclassjava.Lisetner;
 
-import com.sama.communicationclassjava.Data.CommunicationItem;
+
+import com.sama.communicationclassjava.Data.GalleryDatilData;
 
 public interface OnItemClickListener {
-    void onItemClickListener(int position, CommunicationItem item);
+    void onItemClickListener(int position, GalleryDatilData item);
 }

@@ -9,6 +9,7 @@ import com.sama.communicationclassjava.Lisetner.OnGallerySelectItemListListener;
 import com.sama.communicationclassjava.Model.FireBaseModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GalleryPresenter implements GalleryContract.Presenter ,OnGallerySelectItemListListener{
 
@@ -17,7 +18,6 @@ public class GalleryPresenter implements GalleryContract.Presenter ,OnGallerySel
     GalleryAdapterContract.Model adapterModel;
     GalleryAdapterContract.View adapterView;
     FireBaseModel fireBaseModel = FireBaseModel.getInstance();
-    int page = 1;
     public GalleryPresenter() {
         super();
         fireBaseModel.setSelectItemListListener(this);
@@ -62,13 +62,19 @@ public class GalleryPresenter implements GalleryContract.Presenter ,OnGallerySel
 
     @Override
     public void ContentsLoading() {
-        fireBaseModel.SelectGallerycontents(page);
-        page++;
+        view.ItemloadingAlertShow();
+        Long key = null;
+        if(adapterModel.LastItem() != null){
+            key = adapterModel.LastItem().getWriteDay();
+        }
+        fireBaseModel.SelectGallerycontents(key);
     }
 
     @Override
-    public void OnGallerySelectItemList(ArrayList<CommunicationItem> list) {
+    public void OnGallerySelectItemList(ArrayList<GalleryDatilData> list) {
+        view.ItemloadingAlertDisabled();
         this.adapterModel.addItems(list);
+        this.notfyAdaoter();
     }
 }
 
