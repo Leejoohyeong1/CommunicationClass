@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -53,7 +54,6 @@ public class ContentsTypeChoiceActivity extends AppCompatActivity implements Vie
             case R.id.phototypeicon:
                 presenter.openImagePicker();
                 break;
-
         }
     }
 
@@ -63,12 +63,8 @@ public class ContentsTypeChoiceActivity extends AppCompatActivity implements Vie
         if (data != null && resultCode == Activity.RESULT_OK) {
             switch (requestCode){
                 case REQUEST_CODE_DRAW :
-
                     byte[] DrawingByte =  data.getByteArrayExtra("bitmap");
                     presenter.bitmapUpload(DrawingByte);
-//                     result= data.getByteArrayExtra("bitmap")
-//                    val bitmap = BitmapFactory.decodeByteArray(result, 0, result.size)
-//                    saveImage(bitmap)
                     break;
                 }
             }
