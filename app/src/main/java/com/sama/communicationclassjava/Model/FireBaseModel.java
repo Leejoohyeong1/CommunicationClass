@@ -88,7 +88,7 @@ public class FireBaseModel {
         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
             GalleryDatilData data = new GalleryDatilData();
 
-            CollectionReference collection= db.collection("Gallery_"+userInfo.getArea());
+            CollectionReference collection= db.collection("Gallery");
             String documentKey = collection.document().getId();
             data.Merge(userInfo);
             data.addImageUrl(mountainsRef.getPath());
@@ -96,7 +96,7 @@ public class FireBaseModel {
             data.setDocumentKey(documentKey);
 
 
-            db.collection("Gallery_"+userInfo.getArea()).document(documentKey).set(data);
+            db.collection("Gallery").document(documentKey).set(data);
 
 //            DocumentReference document= db.collection("Gallery")
 //                    .document(userInfo.getArea());
@@ -130,7 +130,7 @@ public class FireBaseModel {
 
     public void FireBaseBitmpaUpload(String FileName,byte[] DrawingByte){
 
-        mountainsRef  = storageRef.child("Gallery_"+userInfo.getArea())
+        mountainsRef  = storageRef.child("Gallery")
                 .child(String.valueOf((userInfo.getArea()))).child(FileName+"_"+userInfo.getUUID()+".jpg");
         this.uploadTask = mountainsRef.putBytes(DrawingByte);
         uploadTask
@@ -143,18 +143,22 @@ public class FireBaseModel {
 
         SelectUserInfo userInfo = SelectUserInfo.getInstance();
         if(key != null){
-            db.collection("Gallery_"+userInfo.getArea())
-                    .whereLessThan("writeDay",key)
+            db.collection("Gallery")
+
                     .orderBy("writeDay", Query.Direction.DESCENDING)
-                    .limit(2).get()
+                    .whereLessThan("writeDay",key)
+                    .whereEqualTo("area",userInfo.getArea())
+                    .limit(6).get()
                     .addOnCompleteListener(onCompleteListener);
             return;
         }
 
 
-        db.collection("Gallery_"+userInfo.getArea())
+        db.collection("Gallery")
                 .orderBy("writeDay", Query.Direction.DESCENDING)
-                .limit(2).get()
+
+                .whereEqualTo("area",userInfo.getArea())
+                .limit(6).get()
                 .addOnCompleteListener(onCompleteListener);
 
 
