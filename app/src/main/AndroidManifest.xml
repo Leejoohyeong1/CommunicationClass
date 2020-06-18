@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CommunicationDetailActivity"></activity>
         <activity android:name=".ContentsTypeChoiceActivity" />
-        <activity android:name=".CommunicationGallery">
+        <activity android:name=".CommunicationGalleryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
