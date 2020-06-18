@@ -12,16 +12,15 @@ import java.util.Date;
 public class GalleryDatilData implements Serializable {
 
     ArrayList<String> imageUrl = new ArrayList<>();
-    String documentKey;
 
-    String useruuid;
     Long writeDay;
-//  작성날짜
+    //  작성날짜
     String ProfileImage;
-//  프로필이미지
+    //  프로필이미지
     String ProfileName;
-//  프리필이름
-    int Area;
+    //  프리필이름
+    String area;
+    String documentKey;
 //  지역
 
 //    ArrayList<DatilcommentData> commentList = new ArrayList<>();
@@ -55,6 +54,8 @@ public class GalleryDatilData implements Serializable {
         this.imageUrl = imageUrl;
     }
 
+
+
     public Long getWriteDay() {
         return writeDay;
     }
@@ -79,15 +80,15 @@ public class GalleryDatilData implements Serializable {
         ProfileName = profileName;
     }
 
-    public int getArea() {
-        return Area;
+    public String getArea() {
+        return area;
     }
 
-    public void setArea(int area) {
-        Area = area;
+    public void setArea(String area) {
+        this.area = area;
     }
 
-    //    class DatilcommentData{
+//    class DatilcommentData{
 //        String ProfileImage;
 //        String ProfileName;
 //        String writeDay;
