@@ -4,16 +4,16 @@ import androidx.annotation.NonNull;
 
 public class SelectUserInfo {
 
-    String UUID = "temp_UUID";
-    String Child = "temp_child";
-    String ClassName = "temp_ClassName";
-    String Parents = "temp_Parents";
-    String Group = "temp_Group";
-    int Area = 1;
+    String uuID = "temp_UUID";
+    String child = "temp_child";
+    String className = "temp_ClassName";
+    String parents = "temp_Parents";
+    String group = "temp_Group";
+    String area = "temp_area";
     //  작성날짜
-    String ProfileImage = "temp_ProfileImage";
+    String profileImage = "temp_ProfileImage";
     //  프로필이미지
-    String ProfileName= "temp_ProfileName";
+    String profileName= "temp_ProfileName";
 
 
     private static SelectUserInfo one;
@@ -26,66 +26,66 @@ public class SelectUserInfo {
     }
 
     public String getUUID() {
-        return UUID;
+        return uuID;
     }
 
-    public void setUUID(String UUID) {
-        this.UUID = UUID;
-    }
-
-    public String getProfileImage() {
-        return ProfileImage;
-    }
-
-    public void setProfileImage(String profileImage) {
-        ProfileImage = profileImage;
-    }
-
-    public String getProfileName() {
-        return ProfileName;
-    }
-
-    public void setProfileName(String profileName) {
-        ProfileName = profileName;
+    public void setUuID(String uuID) {
+        this.uuID = uuID;
     }
 
     public String getChild() {
-        return Child;
+        return child;
     }
 
     public void setChild(String child) {
-        Child = child;
+        this.child = child;
     }
 
     public String getClassName() {
-        return ClassName;
+        return className;
     }
 
     public void setClassName(String className) {
-        ClassName = className;
+        this.className = className;
     }
 
     public String getParents() {
-        return Parents;
+        return parents;
     }
 
     public void setParents(String parents) {
-        Parents = parents;
+        this.parents = parents;
     }
 
     public String getGroup() {
-        return Group;
+        return group;
     }
 
     public void setGroup(String group) {
-        Group = group;
+        this.group = group;
     }
 
-    public int getArea() {
-        return Area;
+    public String getArea() {
+        return area;
     }
 
-    public void setArea(int area) {
-        Area = area;
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public String getProfileName() {
+        return profileName;
+    }
+
+    public void setProfileName(String profileName) {
+        this.profileName = profileName;
     }
 }
