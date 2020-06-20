@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CommunicationClassJava</string>
+    <string name="storage">gs://communicationclass-e9cef.appspot.com</string>
 </resources>
