@@ -21,6 +21,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.sama.communicationclassjava.Data.GalleryDatilData;
+import com.sama.communicationclassjava.Data.GalleryDetailCommentData;
+import com.sama.communicationclassjava.Lisetner.OnGallerySelectCommentsListener;
 import com.sama.communicationclassjava.Lisetner.OnGallerySelectItemListListener;
 import com.sama.communicationclassjava.Lisetner.OnGalleryUploadListener;
 import com.sama.communicationclassjava.SinglePattern.SelectUserInfo;
@@ -40,6 +42,7 @@ public class FireBaseModel {
     SelectUserInfo userInfo;
 
     OnGallerySelectItemListListener selectItemListListener;
+    OnGallerySelectCommentsListener onGallerySelectCommentsListener;
     OnGalleryUploadListener OnGalleryUpload;
 
 
@@ -57,8 +60,12 @@ public class FireBaseModel {
         this.OnGalleryUpload = OnGalleryUpload;
     }
 
-    public void setSelectItemListListener(OnGallerySelectItemListListener selectItemListListener) {
+    public void setOnSelectGalleryListener(OnGallerySelectItemListListener selectItemListListener) {
         this.selectItemListListener = selectItemListListener;
+    }
+
+    public void setOnSelectGalleryCommentsListener(OnGallerySelectCommentsListener commentsListener) {
+        this.onGallerySelectCommentsListener = commentsListener;
     }
 
     OnFailureListener bitmpaFailureListener = new OnFailureListener() {
@@ -67,6 +74,8 @@ public class FireBaseModel {
             mountainsRef = null;
         }
     };
+
+
 
     OnCompleteListener onCompleteListener = new OnCompleteListener<QuerySnapshot>(){
 
@@ -79,6 +88,21 @@ public class FireBaseModel {
                     list.add(document.toObject(GalleryDatilData.class));
                 }
                 selectItemListListener.OnGallerySelectItemList(list);
+            }
+        }
+    };
+
+    OnCompleteListener onDetailCommentsListener = new OnCompleteListener<QuerySnapshot>(){
+
+        @Override
+        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            if (task.isSuccessful()) {
+                ArrayList<GalleryDetailCommentData> list = new ArrayList<>();
+                for (DocumentSnapshot document : task.getResult()) {
+                    Log.d(TAG,task.toString());
+                    list.add(document.toObject(GalleryDetailCommentData.class));
+                }
+//                selectItemListListener.OnGallerySelectItemList(list);
             }
         }
     };
@@ -98,22 +122,6 @@ public class FireBaseModel {
 
             db.collection("Gallery").document(documentKey).set(data);
 
-//            DocumentReference document= db.collection("Gallery")
-//                    .document(userInfo.getArea());
-//
-//            String collectionKey = document.getId();
-//            data.Merge(userInfo);
-//            data.addImageUrl(mountainsRef.getPath());
-//            data.writeProduce();
-//            data.setDocumentKey(collectionKey);
-//            document.collection(collectionKey).add(data);
-
-
-
-
-
-
-
             mountainsRef = null;
 
             uploadTask
@@ -129,7 +137,6 @@ public class FireBaseModel {
     }
 
     public void FireBaseBitmpaUpload(String FileName,byte[] DrawingByte){
-
         mountainsRef  = storageRef.child("Gallery")
                 .child(String.valueOf((userInfo.getArea()))).child(FileName+"_"+userInfo.getUUID()+".jpg");
         this.uploadTask = mountainsRef.putBytes(DrawingByte);
@@ -138,13 +145,19 @@ public class FireBaseModel {
                 .addOnSuccessListener(bitmapOnSuccessListener);
     }
 
+    public void SelectGalleryDetailComments(String documentKey){
+        db.collection("Comments")
+                .orderBy("documentKey", Query.Direction.ASCENDING)
+                .whereEqualTo("documentKey",documentKey).get()
+                .addOnCompleteListener(onDetailCommentsListener);
+    }
+
 
     public void SelectGallerycontents(Long key){
 
         SelectUserInfo userInfo = SelectUserInfo.getInstance();
         if(key != null){
             db.collection("Gallery")
-
                     .orderBy("writeDay", Query.Direction.DESCENDING)
                     .whereLessThan("writeDay",key)
                     .whereEqualTo("area",userInfo.getArea())
@@ -153,14 +166,10 @@ public class FireBaseModel {
             return;
         }
 
-
         db.collection("Gallery")
                 .orderBy("writeDay", Query.Direction.DESCENDING)
-
                 .whereEqualTo("area",userInfo.getArea())
                 .limit(6).get()
                 .addOnCompleteListener(onCompleteListener);
-
-
     }
 }
