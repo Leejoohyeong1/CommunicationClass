@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">CommunicationClassJava</string>
     <string name="storage">gs://communicationclass-e9cef.appspot.com</string>
+    <string-array name="comment_key">
+        <item>comment_simple_cool</item>
+        <item>comment_simple_happy</item>
+        <item>comment_simple_in_love</item>
+        <item>comment_simple_laugh</item>
+        <item>comment_simple_nerd</item>
+        <item>comment_simple_nervous</item>
+        <item>comment_simple_smile</item>
+        <item>comment_simple_wink</item>
+        <item>comment_simple_cool</item>
+        <item>comment_simple_happy</item>
+        <item>comment_simple_in_love</item>
+        <item>comment_simple_laugh</item>
+        <item>comment_simple_nerd</item>
+        <item>comment_simple_nervous</item>
+        <item>comment_simple_smile</item>
+        <item>comment_simple_wink</item>
+    </string-array>
+
 </resources>
