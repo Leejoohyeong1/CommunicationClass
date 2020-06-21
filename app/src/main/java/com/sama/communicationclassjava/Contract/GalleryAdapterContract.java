@@ -1,7 +1,7 @@
 package com.sama.communicationclassjava.Contract;
 
 import com.sama.communicationclassjava.Data.CommunicationItem;
-import com.sama.communicationclassjava.Data.GalleryDatilData;
+import com.sama.communicationclassjava.Data.GalleryDetailData;
 import com.sama.communicationclassjava.Lisetner.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ public interface GalleryAdapterContract {
     }
 
     interface Model {
-        void addItems(ArrayList<GalleryDatilData> galleryDatilData);
+        void addItems(ArrayList<GalleryDetailData> galleryDatilData);
         int getSize();
-        GalleryDatilData LastItem();
-        void addItem(GalleryDatilData item);
-        GalleryDatilData getItem(int position);
+        GalleryDetailData LastItem();
+        void addItem(GalleryDetailData item);
+        GalleryDetailData getItem(int position);
         void clearItems();
     }
 }

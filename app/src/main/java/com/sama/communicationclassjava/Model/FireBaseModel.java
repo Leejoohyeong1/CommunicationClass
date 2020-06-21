@@ -20,7 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.sama.communicationclassjava.Data.GalleryDatilData;
+import com.sama.communicationclassjava.Data.GalleryDetailData;
 import com.sama.communicationclassjava.Data.GalleryDetailCommentData;
 import com.sama.communicationclassjava.Lisetner.OnGallerySelectCommentsListener;
 import com.sama.communicationclassjava.Lisetner.OnGallerySelectItemListListener;
@@ -82,10 +82,10 @@ public class FireBaseModel {
         @Override
         public void onComplete(@NonNull Task<QuerySnapshot> task) {
             if (task.isSuccessful()) {
-                ArrayList<GalleryDatilData> list = new ArrayList<>();
+                ArrayList<GalleryDetailData> list = new ArrayList<>();
                 for (DocumentSnapshot document : task.getResult()) {
                     Log.d(TAG,task.toString());
-                    list.add(document.toObject(GalleryDatilData.class));
+                    list.add(document.toObject(GalleryDetailData.class));
                 }
                 selectItemListListener.OnGallerySelectItemList(list);
             }
@@ -110,7 +110,7 @@ public class FireBaseModel {
     OnSuccessListener<UploadTask.TaskSnapshot> bitmapOnSuccessListener = new OnSuccessListener<UploadTask.TaskSnapshot>() {
         @Override
         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-            GalleryDatilData data = new GalleryDatilData();
+            GalleryDetailData data = new GalleryDetailData();
 
             CollectionReference collection= db.collection("Gallery");
             String documentKey = collection.document().getId();

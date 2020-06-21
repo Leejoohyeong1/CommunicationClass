@@ -1,7 +1,7 @@
 package com.sama.communicationclassjava.Presenter;
 
 import com.sama.communicationclassjava.Contract.TypeChoiceContract;
-import com.sama.communicationclassjava.Data.GalleryDatilData;
+import com.sama.communicationclassjava.Data.GalleryDetailData;
 import com.sama.communicationclassjava.Lisetner.OnGalleryUploadListener;
 import com.sama.communicationclassjava.Model.FireBaseModel;
 
@@ -48,7 +48,7 @@ public class TypeChoicePresenter implements TypeChoiceContract.Presenter, OnGall
     }
 
     @Override
-    public void OnGalleryUploadListener(boolean flag, GalleryDatilData item) {
+    public void OnGalleryUploadListener(boolean flag, GalleryDetailData item) {
 
     }
 }

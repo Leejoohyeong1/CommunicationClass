@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sama.communicationclassjava.Adapter.Holder.GalleryHolder;
+import com.sama.communicationclassjava.Holder.GalleryHolder;
 import com.sama.communicationclassjava.Contract.GalleryAdapterContract;
-import com.sama.communicationclassjava.Data.CommunicationItem;
-import com.sama.communicationclassjava.Data.GalleryDatilData;
+import com.sama.communicationclassjava.Data.GalleryDetailData;
 import com.sama.communicationclassjava.Lisetner.OnItemClickListener;
 import com.sama.communicationclassjava.R;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> implements GalleryAdapterContract.Model, GalleryAdapterContract.View{
 
-    ArrayList<GalleryDatilData> ListItem;
+    ArrayList<GalleryDetailData> ListItem;
 
 
     OnItemClickListener onItemClickListener = null;
@@ -34,13 +33,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> implemen
     @Override
     public GalleryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.gallerylistitem, parent, false);
-        GalleryHolder holder = new GalleryHolder(v,onItemClickListener);
+        GalleryHolder holder = new GalleryHolder(v);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull GalleryHolder holder, int position) {
-        holder.onBind(this.ListItem.get(position),position);
+        holder.onBind(this.ListItem.get(position),position,onItemClickListener);
     }
 
     @Override
@@ -71,7 +70,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> implemen
 
 
     @Override
-    public GalleryDatilData LastItem() {
+    public GalleryDetailData LastItem() {
         if(this.ListItem.size() - 1 < 0){
             return null;
         }
@@ -79,7 +78,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> implemen
     }
 
     @Override
-    public void addItems(ArrayList<GalleryDatilData> galleryDatilData) {
+    public void addItems(ArrayList<GalleryDetailData> galleryDatilData) {
         this.ListItem.addAll(galleryDatilData);
     }
 
@@ -89,12 +88,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryHolder> implemen
     }
 
     @Override
-    public void addItem(GalleryDatilData item) {
+    public void addItem(GalleryDetailData item) {
         this.ListItem.add(item);
     }
 
     @Override
-    public GalleryDatilData getItem(int position) {
+    public GalleryDetailData getItem(int position) {
         return this.ListItem.get(position);
     }
 

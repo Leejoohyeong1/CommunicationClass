@@ -1,9 +1,10 @@
 package com.sama.communicationclassjava.Lisetner;
 
-import com.sama.communicationclassjava.Data.GalleryDatilData;
+
+import com.sama.communicationclassjava.Data.GalleryDetailData;
 
 import java.util.ArrayList;
 
 public interface OnGallerySelectItemListListener {
-    void OnGallerySelectItemList(ArrayList<GalleryDatilData> list);
+    void OnGallerySelectItemList(ArrayList<GalleryDetailData> list);
 }
