@@ -34,7 +34,7 @@ public class TypeChoicePresenter implements TypeChoiceContract.Presenter, OnGall
 
     @Override
     public void imagePickerUpload() {
-
+        view.openImagePicker();
     }
 
     @Override

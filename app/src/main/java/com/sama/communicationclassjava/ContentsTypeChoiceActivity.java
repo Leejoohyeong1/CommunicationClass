@@ -5,24 +5,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.divyanshu.draw.activity.DrawingActivity;
 import com.sama.communicationclassjava.Contract.TypeChoiceContract;
-import com.sama.communicationclassjava.Data.CommunicationItem;
-import com.sama.communicationclassjava.Lisetner.OnItemClickListener;
 import com.sama.communicationclassjava.Presenter.TypeChoicePresenter;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
-public class ContentsTypeChoiceActivity extends AppCompatActivity implements View.OnClickListener , TypeChoiceContract.View {
+import gun0912.tedimagepicker.builder.TedImagePicker;
+import gun0912.tedimagepicker.builder.listener.OnMultiSelectedListener;
+import gun0912.tedimagepicker.builder.type.MediaType;
 
-    View DrawingButton;
+public class ContentsTypeChoiceActivity extends AppCompatActivity implements OnMultiSelectedListener
+                                                                            , View.OnClickListener
+                                                                            , TypeChoiceContract.View {
+
+    View drawingTypeButton;
+    View photoTypeButton;
+
     static final int REQUEST_CODE_DRAW = 1;
     InputStream stream = null;
     TypeChoiceContract.Presenter presenter;
@@ -32,8 +36,11 @@ public class ContentsTypeChoiceActivity extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contents_type_choice);
 
-        DrawingButton = findViewById(R.id.drawType);
-        DrawingButton.setOnClickListener(this);
+        this.drawingTypeButton = findViewById(R.id.drawType);
+        this.drawingTypeButton.setOnClickListener(this);
+
+        this.photoTypeButton = findViewById(R.id.PhotoType);
+        this.photoTypeButton.setOnClickListener(this);
 
         presenter = new TypeChoicePresenter();
         presenter.attachView(this);
@@ -51,7 +58,7 @@ public class ContentsTypeChoiceActivity extends AppCompatActivity implements Vie
             case R.id.drawType:
                 presenter.openDrawing();
                 break;
-            case R.id.phototypeicon:
+            case R.id.PhotoType:
                 presenter.openImagePicker();
                 break;
         }
@@ -79,12 +86,20 @@ public class ContentsTypeChoiceActivity extends AppCompatActivity implements Vie
 
     @Override
     public void openImagePicker() {
-        Toast.makeText(this, "openImagePicker", Toast.LENGTH_SHORT).show();
+        TedImagePicker.with(this)
+                .mediaType(MediaType.IMAGE)
+                .max(5, "5장까지 공유가능합니다 ")
+                .startMultiImage(this);
     }
 
     @Override
     public void openDrawing() {
         Intent myIntent = new Intent(this, DrawingActivity.class);
         startActivityForResult(myIntent, REQUEST_CODE_DRAW);
+    }
+
+    @Override
+    public void onSelected(List<? extends Uri> list) {
+        Toast.makeText(this, list.toString(), Toast.LENGTH_SHORT).show();
     }
 }
