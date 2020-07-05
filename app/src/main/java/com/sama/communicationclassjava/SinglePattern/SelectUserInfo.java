@@ -4,16 +4,16 @@ import androidx.annotation.NonNull;
 
 public class SelectUserInfo {
 
-    String uuID = "temp_UUID";
+    String userKey = "7nmN5vW9kk9dzMDLHxEz";
     String child = "temp_child";
     String className = "temp_ClassName";
     String parents = "temp_Parents";
     String group = "temp_Group";
     String area = "temp_area";
     //  작성날짜
-    String profileImage = "temp_ProfileImage";
+    String profileImage = "/Users/temp_area/ProfileImage.jpg";
     //  프로필이미지
-    String profileName= "temp_ProfileName";
+    String profileName= "안원재";
 
 
     private static SelectUserInfo one;
@@ -25,12 +25,12 @@ public class SelectUserInfo {
         return one;
     }
 
-    public String getUUID() {
-        return uuID;
+    public String getUserKey() {
+        return userKey;
     }
 
-    public void setUuID(String uuID) {
-        this.uuID = uuID;
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
     }
 
     public String getChild() {
