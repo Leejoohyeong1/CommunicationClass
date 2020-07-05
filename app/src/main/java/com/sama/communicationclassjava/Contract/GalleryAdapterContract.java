@@ -1,6 +1,5 @@
 package com.sama.communicationclassjava.Contract;
 
-import com.sama.communicationclassjava.Data.CommunicationItem;
 import com.sama.communicationclassjava.Data.GalleryDetailData;
 import com.sama.communicationclassjava.Lisetner.OnItemClickListener;
 

@@ -7,32 +7,55 @@ import com.sama.communicationclassjava.SinglePattern.SelectUserInfo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CommunicationItem implements Serializable {
+public class CommentData implements Serializable {
 
-    String documentKey;
+    String galleryDocumentKey;
     String profileImage;
     String profileName;
+    String writeUserKey;
     Long writeDay;
     String imageKey;
+    String commentKey;
 
-    public CommunicationItem(String documentKey, String imageKey) {
-        this.documentKey = documentKey;
-        this.imageKey = imageKey;
+    public CommentData() {} //Needed for Firebase
+
+    public void setInfo(String galleryDocumentKey, String imageKey,String commentKey) {
+        this.setGalleryDocumentKey(galleryDocumentKey);
+        this.setImageKey(imageKey);
+        this.setCommentKey(commentKey);
     }
 
 
     public void Merge(SelectUserInfo info){
+        this.setWriteUserKey(info.getUserKey());
         this.setProfileImage(info.getProfileImage());
         this.setProfileName(info.getProfileName());
         this.writeDay = new Date().getTime();
     }
 
-    public String getDocumentKey() {
-        return documentKey;
+
+    public String getCommentKey() {
+        return commentKey;
     }
 
-    public void setDocumentKey(String documentKey) {
-        this.documentKey = documentKey;
+    public void setCommentKey(String commentKey) {
+        this.commentKey = commentKey;
+    }
+
+    public String getWriteUserKey() {
+        return writeUserKey;
+    }
+
+    public void setWriteUserKey(String writeUserKey) {
+        this.writeUserKey = writeUserKey;
+    }
+
+    public String getGalleryDocumentKey() {
+        return galleryDocumentKey;
+    }
+
+    public void setGalleryDocumentKey(String galleryDocumentKey) {
+        this.galleryDocumentKey = galleryDocumentKey;
     }
 
     public String getProfileImage() {

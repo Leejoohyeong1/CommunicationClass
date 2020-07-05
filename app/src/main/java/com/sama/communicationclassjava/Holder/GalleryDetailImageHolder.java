@@ -34,6 +34,7 @@ public class GalleryDetailImageHolder extends RecyclerView.ViewHolder implements
 
         Glide.with(contentsImageView.getContext())
                 .load(storageRef)
+                .dontTransform()
                 .into(contentsImageView);
 
         contentsImageView.setOnClickListener(this);

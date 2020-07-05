@@ -13,6 +13,7 @@ public class GalleryDetailData implements Serializable {
 
     ArrayList<String> imageUrl = new ArrayList<>();
 
+    String writeUserKey;
     Long writeDay;
     //  작성날짜
     String ProfileImage;
@@ -26,9 +27,19 @@ public class GalleryDetailData implements Serializable {
 //    ArrayList<DatilcommentData> commentList = new ArrayList<>();
 
     public void Merge(SelectUserInfo info){
+        this.setWriteUserKey(info.getUserKey());
         this.setProfileImage(info.getProfileImage());
         this.setProfileName(info.getProfileName());
         this.setArea(info.getArea());
+    }
+
+
+    public String getWriteUserKey() {
+        return writeUserKey;
+    }
+
+    public void setWriteUserKey(String writeUserKey) {
+        this.writeUserKey = writeUserKey;
     }
 
     public String getDocumentKey() {

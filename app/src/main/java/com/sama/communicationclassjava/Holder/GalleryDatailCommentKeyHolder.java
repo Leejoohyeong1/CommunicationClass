@@ -10,13 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.storage.FirebaseStorage;
+import com.sama.communicationclassjava.Lisetner.OnImageKeyboardListener;
 import com.sama.communicationclassjava.R;
+
+import java.util.Date;
 
 public class GalleryDatailCommentKeyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     String CommentKeyfileName;
     int position;
     ImageView commentKeyView;
+    OnImageKeyboardListener onImageKeyboardListener;
+    long doublePressTime;
+
 
     public GalleryDatailCommentKeyHolder(@NonNull View itemView) {
         super(itemView);
@@ -24,9 +30,10 @@ public class GalleryDatailCommentKeyHolder extends RecyclerView.ViewHolder imple
 
     }
 
-    public void onBind(final String CommentKeyfileName, final int position) {
+    public void onBind(final String CommentKeyfileName, final int position,OnImageKeyboardListener onImageKeyboardListener) {
         this.position = position;
         this.CommentKeyfileName = CommentKeyfileName;
+        this.onImageKeyboardListener = onImageKeyboardListener;
 
         int id = commentKeyView.getResources().getIdentifier(CommentKeyfileName, "drawable", itemView.getContext().getPackageName());
         Drawable drawable;
@@ -35,7 +42,7 @@ public class GalleryDatailCommentKeyHolder extends RecyclerView.ViewHolder imple
         } else {
             drawable = commentKeyView.getResources().getDrawable(id);
         }
-
+        doublePressTime = new Date().getTime();
         commentKeyView.setBackground(drawable);
         commentKeyView.setOnClickListener(this);
 
@@ -43,6 +50,17 @@ public class GalleryDatailCommentKeyHolder extends RecyclerView.ViewHolder imple
 
     @Override
     public void onClick(View v) {
+
+        if(new Date().getTime() - doublePressTime < 500){
+            onImageKeyboardListener.OnKeyDoublePress(this.CommentKeyfileName, position);
+        }else{
+            onImageKeyboardListener.OnKeyPress(this.CommentKeyfileName, position);
+        }
+        doublePressTime = new Date().getTime();
+
+
+
+
 
     }
 }

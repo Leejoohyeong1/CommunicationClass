@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sama.communicationclassjava.Contract.GalleryDetailCommentKeyAdpterContract;
 import com.sama.communicationclassjava.Holder.GalleryDatailCommentKeyHolder;
+import com.sama.communicationclassjava.Lisetner.OnImageKeyboardListener;
 import com.sama.communicationclassjava.R;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class GalleryDatailCommentKeyAdapter extends RecyclerView.Adapter<GalleryDatailCommentKeyHolder>
                                             implements GalleryDetailCommentKeyAdpterContract.Model
                                                      , GalleryDetailCommentKeyAdpterContract.View {
-
+    OnImageKeyboardListener onImageKeyboardListener;
     ArrayList<String> commentKeys;
     @NonNull
     @Override
@@ -29,7 +30,7 @@ public class GalleryDatailCommentKeyAdapter extends RecyclerView.Adapter<Gallery
 
     @Override
     public void onBindViewHolder(@NonNull GalleryDatailCommentKeyHolder holder, int position) {
-        holder.onBind(this.commentKeys.get(position),position);
+        holder.onBind(this.commentKeys.get(position),position,onImageKeyboardListener);
     }
 
     @Override
@@ -45,6 +46,11 @@ public class GalleryDatailCommentKeyAdapter extends RecyclerView.Adapter<Gallery
     @Override
     public void CommentKeyAdpterNotfyAdaoter() {
         this.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setOnImageKeyboardListener(OnImageKeyboardListener onImageKeyboardListener) {
+        this.onImageKeyboardListener = onImageKeyboardListener;
     }
 
     @Override
