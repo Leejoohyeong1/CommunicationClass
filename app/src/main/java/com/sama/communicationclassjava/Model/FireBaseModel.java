@@ -1,7 +1,6 @@
 package com.sama.communicationclassjava.Model;
 
 
-import android.provider.SyncStateContract;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -20,8 +18,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.sama.communicationclassjava.Data.CommentData;
 import com.sama.communicationclassjava.Data.GalleryDetailData;
-import com.sama.communicationclassjava.Data.GalleryDetailCommentData;
+import com.sama.communicationclassjava.Lisetner.OnCommentInsertListener;
 import com.sama.communicationclassjava.Lisetner.OnGallerySelectCommentsListener;
 import com.sama.communicationclassjava.Lisetner.OnGallerySelectItemListListener;
 import com.sama.communicationclassjava.Lisetner.OnGalleryUploadListener;
@@ -42,8 +41,9 @@ public class FireBaseModel {
     SelectUserInfo userInfo;
 
     OnGallerySelectItemListListener selectItemListListener;
-    OnGallerySelectCommentsListener onGallerySelectCommentsListener;
+
     OnGalleryUploadListener OnGalleryUpload;
+
 
 
     private static FireBaseModel one;
@@ -56,16 +56,13 @@ public class FireBaseModel {
     }
 
 
+
     public void setOnGalleryUploadListener(OnGalleryUploadListener OnGalleryUpload) {
         this.OnGalleryUpload = OnGalleryUpload;
     }
 
     public void setOnSelectGalleryListener(OnGallerySelectItemListListener selectItemListListener) {
         this.selectItemListListener = selectItemListListener;
-    }
-
-    public void setOnSelectGalleryCommentsListener(OnGallerySelectCommentsListener commentsListener) {
-        this.onGallerySelectCommentsListener = commentsListener;
     }
 
     OnFailureListener bitmpaFailureListener = new OnFailureListener() {
@@ -92,27 +89,14 @@ public class FireBaseModel {
         }
     };
 
-    OnCompleteListener onDetailCommentsListener = new OnCompleteListener<QuerySnapshot>(){
 
-        @Override
-        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-            if (task.isSuccessful()) {
-                ArrayList<GalleryDetailCommentData> list = new ArrayList<>();
-                for (DocumentSnapshot document : task.getResult()) {
-                    Log.d(TAG,task.toString());
-                    list.add(document.toObject(GalleryDetailCommentData.class));
-                }
-//                selectItemListListener.OnGallerySelectItemList(list);
-            }
-        }
-    };
 
     OnSuccessListener<UploadTask.TaskSnapshot> bitmapOnSuccessListener = new OnSuccessListener<UploadTask.TaskSnapshot>() {
         @Override
         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
             GalleryDetailData data = new GalleryDetailData();
 
-            CollectionReference collection= db.collection("Gallery");
+            CollectionReference collection = db.collection("Gallery");
             String documentKey = collection.document().getId();
             data.Merge(userInfo);
             data.addImageUrl(mountainsRef.getPath());
@@ -138,19 +122,14 @@ public class FireBaseModel {
 
     public void FireBaseBitmpaUpload(String FileName,byte[] DrawingByte){
         mountainsRef  = storageRef.child("Gallery")
-                .child(String.valueOf((userInfo.getArea()))).child(FileName+"_"+userInfo.getUUID()+".jpg");
+                .child(String.valueOf((userInfo.getArea()))).child(FileName+"_"+userInfo.getUserKey()+".jpg");
         this.uploadTask = mountainsRef.putBytes(DrawingByte);
         uploadTask
                 .addOnFailureListener(bitmpaFailureListener)
                 .addOnSuccessListener(bitmapOnSuccessListener);
     }
 
-    public void SelectGalleryDetailComments(String documentKey){
-        db.collection("Comments")
-                .orderBy("documentKey", Query.Direction.ASCENDING)
-                .whereEqualTo("documentKey",documentKey).get()
-                .addOnCompleteListener(onDetailCommentsListener);
-    }
+
 
 
     public void SelectGallerycontents(Long key){
