@@ -4,11 +4,26 @@ import com.sama.communicationclassjava.Contract.GalleryDetailCommentAdpterContra
 import com.sama.communicationclassjava.Contract.GalleryDetailCommentKeyAdpterContract;
 import com.sama.communicationclassjava.Contract.GalleryDetailContract;
 import com.sama.communicationclassjava.Contract.GalleryDetailImageAdpterContract;
-import com.sama.communicationclassjava.Data.GalleryDetailData;
+import com.sama.communicationclassjava.Data.CommentData;
+import com.sama.communicationclassjava.Lisetner.OnCommentDeleteListener;
+import com.sama.communicationclassjava.Lisetner.OnCommentDeletePressListener;
+import com.sama.communicationclassjava.Lisetner.OnCommentInsertListener;
+import com.sama.communicationclassjava.Lisetner.OnGallerySelectCommentsListener;
+import com.sama.communicationclassjava.Lisetner.OnImageKeyboardListener;
+import com.sama.communicationclassjava.Lisetner.OnGallerySelectItemListListener;
+import com.sama.communicationclassjava.MassageEnum.Massage;
+import com.sama.communicationclassjava.Model.FileBaseCommentDeleteModel;
+import com.sama.communicationclassjava.Model.FileBaseCommentInsertModel;
+import com.sama.communicationclassjava.Model.FileBaseCommentSelectModel;
+import com.sama.communicationclassjava.Model.FireBaseModel;
 
 import java.util.ArrayList;
 
-public class GalleryDetailPresenter implements GalleryDetailContract.Presenter {
+public class GalleryDetailPresenter implements GalleryDetailContract.Presenter
+                                            , OnGallerySelectCommentsListener
+                                            , OnCommentInsertListener
+                                            , OnCommentDeleteListener {
+
     GalleryDetailContract.View view;
 
     GalleryDetailImageAdpterContract.Model imageAdapterModel;
@@ -19,6 +34,16 @@ public class GalleryDetailPresenter implements GalleryDetailContract.Presenter {
 
     GalleryDetailCommentKeyAdpterContract.Model commentKeyAdapterModel;
     GalleryDetailCommentKeyAdpterContract.View commentKeyAdapterView;
+
+    String documentKey;
+
+    public GalleryDetailPresenter(String documentKey) {
+        this.documentKey = documentKey;
+        FileBaseCommentSelectModel.getInstance().setOnSelectGalleryCommentsListener(this);
+        FileBaseCommentSelectModel.getInstance().SelectGalleryDetailComments(this.documentKey);
+        FileBaseCommentInsertModel.getInstance().setOnCommentInsertListener(this);
+        FileBaseCommentDeleteModel.getInstance().setonCommentDeleteListener(this);
+    }
 
     @Override
     public void attachView(GalleryDetailContract.View view) {
@@ -60,6 +85,16 @@ public class GalleryDetailPresenter implements GalleryDetailContract.Presenter {
         this.commentKeyAdapterView = View;
     }
 
+    @Override
+    public void setOnImageKeyboardListener(OnImageKeyboardListener onImageKeyboardListener) {
+        this.commentKeyAdapterModel.setOnImageKeyboardListener(onImageKeyboardListener);
+    }
+
+    @Override
+    public void setOnCommentDeletePressListener(OnCommentDeletePressListener onCommentDeletePressListener) {
+        this.commentAdapterModel.setOnCommentDeletePressListener(onCommentDeletePressListener);
+    }
+
 
     @Override
     public void setDetailImagesSrc(ArrayList<String> srcs) {
@@ -83,14 +118,67 @@ public class GalleryDetailPresenter implements GalleryDetailContract.Presenter {
 
     @Override
     public void notfyCommentsKeyAdapter() {
-
+        this.commentKeyAdapterView.CommentKeyAdpterNotfyAdaoter();
     }
 
     @Override
     public void keyAreaViewActivation(boolean flag) {
         if (flag)
-            this.view.setKeyAreaGone();
-        else
             this.view.setKeyAreaVisible();
+        else
+            this.view.setKeyAreaGone();
+
     }
+
+    @Override
+    public void insertComment(String imageKey) {
+        view.showDisplayProgressDialog();
+        FileBaseCommentInsertModel.getInstance().insertComment(imageKey,documentKey);
+    }
+
+    @Override
+    public void setKeyPreView(String imageKey, int position) {
+        this.view.setKeyPreView(imageKey);
+    }
+
+    @Override
+    public void OnCommentItems(ArrayList<CommentData> list) {
+        this.commentAdapterModel.setCommentItems(list);
+        this.commentAdapterView.CommentAdpternotfyAdaoter();
+    }
+
+    @Override
+    public void OnInsertSuccess(CommentData item) {
+        this.commentAdapterModel.addCommentItem(item);
+        this.commentAdapterView.CommentAdpternotfyAdaoter();
+        this.view.setLookComment(this.commentAdapterModel.getLastSize()-1);
+        this.view.noneDisplayProgressDialog();
+    }
+    @Override
+    public void OnInsertFailure() {
+        this.view.noneDisplayProgressDialog();
+        this.view.ToastMassage(Massage.OnInsertFailure);
+
+    }
+
+    @Override
+    public void deleteComment(CommentData commentData, int position) {
+        view.showDisplayProgressDialog();
+        FileBaseCommentDeleteModel.getInstance().deleteComment(commentData,position);
+    }
+
+    @Override
+    public void OnDeleteSuccess(int position) {
+        this.commentAdapterModel.removeCommentItem(position);
+        this.commentAdapterView.CommentAdpternotfyAdaoter();
+        this.view.noneDisplayProgressDialog();
+    }
+
+    @Override
+    public void OnDeleteFailure() {
+        this.view.noneDisplayProgressDialog();
+        this.view.ToastMassage(Massage.OnDeleteFailure);
+    }
+
+
 }
