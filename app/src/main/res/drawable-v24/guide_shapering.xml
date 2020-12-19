@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <item>-->
+<!--        <shape android:shape="oval">-->
+<!--            <stroke android:color="#002060" android:width="3dp" />-->
+<!--            <solid android:color="#FFFFFF"/>-->
+<!--            <size android:width="48dp" android:height="48dp"/>-->
+<!--        </shape>-->
+
+<!--    </item>-->
+<!--    <item android:drawable="@drawable/drawicon" />-->
+
+<!--</selector>-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item>
+            <shape android:shape="oval">
+                <stroke android:color="#002060" android:width="10dp" />
+
+                <size android:width="100dp" android:height="100dp"/>
+            </shape>
+
+        </item>
+
+
+
+    <item
+        android:drawable="@drawable/guide_icon"
+        android:bottom="1dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp"/>
+    </layer-list>
+

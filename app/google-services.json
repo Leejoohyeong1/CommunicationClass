@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:995934440500:android:6982fbe175ded522630e61",
+        "android_client_info": {
+          "package_name": "com.sama.communicationclass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995934440500-fmrhjhcuaftg2nhahm69feqpdk5ib8tl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdkpVZ2wNDyLvoyoVYI0_N2kmvJg4zlVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995934440500-fmrhjhcuaftg2nhahm69feqpdk5ib8tl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:995934440500:android:e9efa1b76ad31752630e61",
         "android_client_info": {
           "package_name": "com.sama.communicationclassjava"

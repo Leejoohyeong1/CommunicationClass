@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">CommunicationClassJava</string>
+    <string name="app_name">나누리톡</string>
     <string name="storage">gs://communicationclass-e9cef.appspot.com</string>
+
+    <string name="toolbar_choice_title">나 선택하기</string>
+    <string name="toolbar_contents_upload_title"> 글 나누리</string>
+
     <string-array name="comment_key">
         <item>comment_simple_cool</item>
         <item>comment_simple_happy</item>
@@ -19,5 +23,7 @@
         <item>comment_simple_smile</item>
         <item>comment_simple_wink</item>
     </string-array>
+
+
 
 </resources>

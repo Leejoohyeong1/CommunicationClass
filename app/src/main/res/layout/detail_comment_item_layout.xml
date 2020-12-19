@@ -12,7 +12,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
-        android:src="@drawable/chil_image"
         app:civ_border_color="#FFFFFF"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toTopOf="@+id/detail_comment_name"

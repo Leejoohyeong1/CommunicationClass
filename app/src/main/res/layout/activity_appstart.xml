@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:id="@+id/start_view"
+    tools:context=".AppStartActivity">
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="90dp"
+        android:id="@+id/app_start_cloud1"
+        android:background="@drawable/app_start_cloud"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textArea0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/app_start_cloud2"
+        app:layout_constraintHorizontal_bias=".6"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/app_start_cloud2"
+        android:background="@drawable/app_start_cloud"
+        android:layout_marginStart="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textArea0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        />
+
+<!--    나누리-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="우리들의 이야기"
+        android:id="@+id/textArea0"
+        android:textSize="25sp"
+        android:layout_marginLeft="30dp"
+        android:rotation="-15"
+        android:fontFamily="@font/kcc_murukmuruk"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textArea1"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="나누리 톡!"
+        android:textColor="#15A53F"
+        android:id="@+id/textArea1"
+        android:gravity="center"
+        android:textSize="90sp"
+        android:fontFamily="@font/kcc_murukmuruk"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textArea2"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textArea2"
+        android:text="화면을 눌러주세요"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="90dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/app_start_bottom"
+        />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/app_start_bottom"
+        android:background="@drawable/app_start_bottom"
+        app:layout_constraintHeight_percent="0.28"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/app_start_sun"
+        app:layout_constraintVertical_bias="0.72"
+        app:layout_constraintHorizontal_bias=".9"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintDimensionRatio="1:1"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

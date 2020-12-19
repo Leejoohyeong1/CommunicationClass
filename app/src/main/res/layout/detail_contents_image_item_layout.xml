@@ -16,7 +16,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/detail_contents"
-            android:src="@drawable/chil_image"
             android:adjustViewBounds="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
